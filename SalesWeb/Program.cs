@@ -9,6 +9,9 @@ builder.Services.AddDbContext<SalesWebContext> // Registro do SalesWeb (classe q
 ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("SalesWebContext")), // Detecta automáticamente a versão do MySQL a partir da conexão
 mySqlOptions => mySqlOptions.MigrationsAssembly("SalesWeb"))); // Indica onde as migrações do banco serão armazenadas
 
+// Registrar o serviço de seeding:
+builder.Services.AddScoped<SeedingService>();
+
 // Add o suporte para MVC, permitindo que a aplicação utilize Controllers e Views
 builder.Services.AddControllersWithViews();
 
@@ -35,5 +38,11 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+// Executa o SeedingService ao iniciar a aplicação:
+using (var scope = app.Services.CreateScope()) // Criação de um escopo de serviço (um escopo é criado uma vez por requisição ou operação, utilizado em uma área restrita)
+{
+    var seedingService = scope.ServiceProvider.GetRequiredService<SeedingService>(); // Obtendo a instância do SeedingService através do ServiceProvider
+    await seedingService.Seed(); // Execução do método Seed
+}
 
 app.Run(); // Inicia o servidor web para começar a receber requisições.
