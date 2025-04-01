@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SalesWeb.Data;
+using SalesWeb.Services;
 
 var builder = WebApplication.CreateBuilder(args); // Contrutor da aplicação com as configurações iniciais
 
@@ -11,6 +12,9 @@ mySqlOptions => mySqlOptions.MigrationsAssembly("SalesWeb"))); // Indica onde as
 
 // Registrar o serviço de seeding:
 builder.Services.AddScoped<SeedingService>();
+
+// Registrar o SellerService:
+builder.Services.AddScoped<SellerService>();
 
 // Add o suporte para MVC, permitindo que a aplicação utilize Controllers e Views
 builder.Services.AddControllersWithViews();
