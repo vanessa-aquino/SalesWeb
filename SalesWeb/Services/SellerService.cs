@@ -17,5 +17,13 @@ namespace SalesWeb.Services
         {
             return await _context.Seller.ToListAsync();
         }
+
+        public async Task Insert(Seller obj)
+        {
+            obj.Department = _context.Department.First();
+            _context.Add(obj);
+            await _context.SaveChangesAsync();
+
+        }
     }
 }

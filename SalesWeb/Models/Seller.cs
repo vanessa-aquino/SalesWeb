@@ -3,11 +3,12 @@
     public class Seller
     {
         public int Id { get; private set; }
-        public string Name { get; private set; }
-        public string Email { get; private set; }
-        public DateTime BirthDate { get; private set; }
-        public double BaseSalary { get; private set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public DateTime BirthDate { get; set; }
+        public double BaseSalary { get; set; }
         public Department Department { get; set; }
+        public int DepartmentId { get; set; }
         public ICollection<SalesRecord> Sales { get; private set; } = new List<SalesRecord>();
 
         public Seller() { }
@@ -20,22 +21,6 @@
             BirthDate = birthDate;
             BaseSalary = baseSalary;
             Department = department;
-        }
-
-        public void SetName(string name)
-        {
-            if(!string.IsNullOrWhiteSpace(name))
-            {
-                Name = name;
-            }
-        }
-
-        public void SetEmail(string email)
-        {
-            if(!string.IsNullOrWhiteSpace(email))
-            {
-                Email = email;
-            }
         }
 
         public void AddSales(SalesRecord sales)

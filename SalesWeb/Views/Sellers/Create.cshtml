@@ -1,0 +1,35 @@
+﻿@model SalesWeb.Models.Seller
+
+@{
+    ViewData["Title"] = "Adicionar Vendedor";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>Vendedor</h4>
+<hr />
+<div>
+    <div>
+        <form asp-action="Create">
+            <div>
+                <label asp-for="Name">Nome</label>
+                <input asp-for="Name"/>
+            </div>
+            <div>
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" />
+            </div>
+            <div>
+                <label asp-for="BirthDate">Data de nascimento</label>
+                <input asp-for="BirthDate" />
+            </div>
+            <div>
+                <label asp-for="BaseSalary">Salário</label>
+                <input asp-for="BaseSalary" />
+            </div>
+            <div>
+                <input type="submit" value="Create" />
+            </div>
+        </form>
+    </div>
+</div>
