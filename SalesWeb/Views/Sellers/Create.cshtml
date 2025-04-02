@@ -1,4 +1,4 @@
-﻿@model SalesWeb.ViewModels.SellerFormViewModel;
+﻿@model SalesWeb.ViewModels.SellerFormViewModel;  
 
 @{
     ViewData["Title"] = "Adicionar Vendedor";
@@ -10,9 +10,9 @@
 <hr />
 <div>
     <div>
-        <form asp-action="Create">
+        <form asp-action="Create"> @*O asp-action define para onde o formulário será enviado, nesse caso, para o método Create*@
             <div>
-                <label asp-for="Seller.Name">Nome</label>
+                <label asp-for="Seller.Name">Nome</label> @*O asp-for vincula o campo HTML à propriedade correspondente do modelo, ou seja, o que for digitado no campo input, será automaticamente associado à propriedade no asp-for, nesse caso, a propriedade Seller.Name*@
                 <input asp-for="Seller.Name"/>
             </div>
             <div>
@@ -30,6 +30,7 @@
             <div>
                 <label asp-for="Seller.DepartmentId"></label>
                 <select asp-for="Seller.DepartmentId" asp-items="@(new SelectList(Model.Departments, "Id", "Name"))"></select>
+                @*O asp-item preenche automaticamente um select com uma lista de opções*@
             </div>
             <div>
                 <input type="submit" value="Create" />

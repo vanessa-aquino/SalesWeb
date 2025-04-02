@@ -24,5 +24,17 @@ namespace SalesWeb.Services
             await _context.SaveChangesAsync();
 
         }
+
+        public Seller FindById(int id)
+        {
+            return _context.Seller.FirstOrDefault(obj => obj.Id == id);
+        }
+
+        public async Task Remove(int id)
+        {
+            var obj = _context.Seller.Find(id);
+            _context.Remove(obj);
+            await _context.SaveChangesAsync();
+        }
     }
 }

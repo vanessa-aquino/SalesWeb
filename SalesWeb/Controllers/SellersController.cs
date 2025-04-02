@@ -36,8 +36,24 @@ namespace SalesWeb.Controllers
 
             await _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
+        }
 
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) NotFound();
 
+            var seller = _sellerService.FindById(id.Value);
+            if(seller == null) NotFound();
+
+            return View(seller);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            await _sellerService.Remove(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
