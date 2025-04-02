@@ -55,5 +55,15 @@ namespace SalesWeb.Controllers
             await _sellerService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if(id == null) NotFound();
+
+            var seller = _sellerService.FindById(id.Value);
+            if(seller == null) NotFound();
+
+            return View(seller);
+        }
     }
 }
