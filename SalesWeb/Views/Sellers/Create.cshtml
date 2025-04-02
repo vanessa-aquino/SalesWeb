@@ -1,4 +1,4 @@
-﻿@model SalesWeb.Models.Seller
+﻿@model SalesWeb.ViewModels.SellerFormViewModel;
 
 @{
     ViewData["Title"] = "Adicionar Vendedor";
@@ -12,20 +12,24 @@
     <div>
         <form asp-action="Create">
             <div>
-                <label asp-for="Name">Nome</label>
-                <input asp-for="Name"/>
+                <label asp-for="Seller.Name">Nome</label>
+                <input asp-for="Seller.Name"/>
             </div>
             <div>
-                <label asp-for="Email">Email</label>
-                <input asp-for="Email" />
+                <label asp-for="Seller.Email">Email</label>
+                <input asp-for="Seller.Email" />
             </div>
             <div>
-                <label asp-for="BirthDate">Data de nascimento</label>
-                <input asp-for="BirthDate" />
+                <label asp-for="Seller.BirthDate">Data de nascimento</label>
+                <input asp-for="Seller.BirthDate" />
             </div>
             <div>
-                <label asp-for="BaseSalary">Salário</label>
-                <input asp-for="BaseSalary" />
+                <label asp-for="Seller.BaseSalary">Salário</label>
+                <input asp-for="Seller.BaseSalary" />
+            </div>
+            <div>
+                <label asp-for="Seller.DepartmentId"></label>
+                <select asp-for="Seller.DepartmentId" asp-items="@(new SelectList(Model.Departments, "Id", "Name"))"></select>
             </div>
             <div>
                 <input type="submit" value="Create" />

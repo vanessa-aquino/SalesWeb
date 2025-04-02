@@ -16,6 +16,9 @@ builder.Services.AddScoped<SeedingService>();
 // Registrar o SellerService:
 builder.Services.AddScoped<SellerService>();
 
+// Resgistrar o DepartmentService:
+builder.Services.AddScoped<DepartmentService>();
+
 // Add o suporte para MVC, permitindo que a aplicação utilize Controllers e Views
 builder.Services.AddControllersWithViews();
 

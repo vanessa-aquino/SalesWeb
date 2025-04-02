@@ -22,7 +22,6 @@
             BaseSalary = baseSalary;
             Department = department;
         }
-
         public void AddSales(SalesRecord sales)
         {
             Sales.Add(sales);
