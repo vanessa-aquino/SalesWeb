@@ -2,6 +2,7 @@
 using SalesWeb.Models;
 using SalesWeb.Services;
 using SalesWeb.ViewModels;
+using SalesWeb.Services.Exceptions;
 
 namespace SalesWeb.Controllers
 {
@@ -42,7 +43,7 @@ namespace SalesWeb.Controllers
         {
             if (id == null) NotFound();
 
-            var seller = _sellerService.FindById(id.Value);
+            var seller = await _sellerService.FindById(id.Value);
             if(seller == null) NotFound();
 
             return View(seller);
@@ -60,10 +61,43 @@ namespace SalesWeb.Controllers
         {
             if(id == null) NotFound();
 
-            var seller = _sellerService.FindById(id.Value);
+            var seller = await _sellerService.FindById(id.Value);
             if(seller == null) NotFound();
 
             return View(seller);
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null) NotFound();
+
+            var seller = await _sellerService.FindById(id.Value);
+            if(seller == null) NotFound();
+
+            List<Department> departments = await _departmentService.FindAll();
+            SellerFormViewModel viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Seller seller)
+        {
+            if (id != seller.Id) BadRequest();
+
+            try
+            {
+            await _sellerService.Update(seller);
+            return RedirectToAction(nameof(Index));
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (DbConcurrencyException)
+            {
+                return BadRequest();
+            }
         }
     }
 }
