@@ -34,6 +34,12 @@ namespace SalesWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Seller seller)
         {
+            if (!ModelState.IsValid)
+            {
+                var departmenst = await _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departmenst };
+                return View(viewModel);
+            }
 
             await _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
@@ -83,6 +89,13 @@ namespace SalesWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Seller seller)
         {
+            if (!ModelState.IsValid)
+            {
+                var departmenst = await _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departmenst };
+                return View(viewModel);
+            }
+
             if (id != seller.Id) return RedirectToAction(nameof(Error), new { message = "Id not mismatch" });
 
             try

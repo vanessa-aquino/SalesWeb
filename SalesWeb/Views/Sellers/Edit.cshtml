@@ -13,20 +13,27 @@
         <form asp-action="Edit">
             <input type="hidden" asp-for="Seller.Id" />
             <div>
-                <label asp-for="Seller.Name">Nome</label> 
+                <label asp-for="Seller.Name">Nome</label>
                 <input asp-for="Seller.Name" />
+                <span asp-validation-for="Seller.Name"></span>
             </div>
             <div>
                 <label asp-for="Seller.Email">Email</label>
                 <input asp-for="Seller.Email" />
+                <span asp-validation-for="Seller.Email"></span>
+
             </div>
             <div>
                 <label asp-for="Seller.BirthDate">Data de nascimento</label>
                 <input asp-for="Seller.BirthDate" />
+                <span asp-validation-for="Seller.BirthDate"></span>
+
             </div>
             <div>
                 <label asp-for="Seller.BaseSalary">Salário</label>
                 <input asp-for="Seller.BaseSalary" />
+                <span asp-validation-for="Seller.BaseSalary"></span>
+
             </div>
             <div>
                 <label asp-for="Seller.DepartmentId"></label>
@@ -38,3 +45,9 @@
         </form>
     </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
