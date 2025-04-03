@@ -1,13 +1,22 @@
-﻿namespace SalesWeb.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SalesWeb.Models
 {
     public class Seller
     {
         public int Id { get; set; }
+        [Display(Name = "Nome")]
         public string Name { get; set; }
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+        [Display(Name = "Data de Nascimento")]
+        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
+        [Display(Name = "Salário")]
+        [DisplayFormat(DataFormatString = "R$ {0:F2}")]
         public double BaseSalary { get; set; }
         public Department Department { get; set; }
+        [Display(Name = "Departamento")]
         public int DepartmentId { get; set; }
         public ICollection<SalesRecord> Sales { get; private set; } = new List<SalesRecord>();
 

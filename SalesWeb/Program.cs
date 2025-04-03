@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 using SalesWeb.Data;
 using SalesWeb.Services;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args); // Contrutor da aplicação com as configurações iniciais
 
@@ -10,30 +13,51 @@ builder.Services.AddDbContext<SalesWebContext> // Registro do SalesWeb (classe q
 ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("SalesWebContext")), // Detecta automáticamente a versão do MySQL a partir da conexão
 mySqlOptions => mySqlOptions.MigrationsAssembly("SalesWeb"))); // Indica onde as migrações do banco serão armazenadas
 
-// Registrar o serviço de seeding:
+// Registrar os serviços:
 builder.Services.AddScoped<SeedingService>();
-
-// Registrar o SellerService:
 builder.Services.AddScoped<SellerService>();
-
-// Resgistrar o DepartmentService:
 builder.Services.AddScoped<DepartmentService>();
 
 // Add o suporte para MVC, permitindo que a aplicação utilize Controllers e Views
 builder.Services.AddControllersWithViews();
+
+// Definição do locale:
+var cultureInfo = new CultureInfo("pt-BR");
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+// Configuração do Middleware de localização:
+var supportedCultures = new[] { cultureInfo };
+var localizationOptions = new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture(cultureInfo),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures
+};
+
+// Add configuração ao serviço:
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new RequestCulture(cultureInfo);
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
 
 var app = builder.Build(); // Finalização da configuração e criação da aplicação a ser executada
 
 // Configuração do Middleware (Conjunto de componentes que manipulkam requisições antes e depois de serem processadas):
 if (!app.Environment.IsDevelopment())
 {
-// Se a aplicação não está rodando em ambiente de desenvolvimento, ativa um manipulador de erros e HSTS(para melhorar a segurança com HTTPS).
+    // Se a aplicação não está rodando em ambiente de desenvolvimento, ativa um manipulador de erros e HSTS(para melhorar a segurança com HTTPS).
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
 
 app.UseHttpsRedirection(); // Redireciona todas as requisições HTTP para HTTPS.
 app.UseRouting(); // Habilita o roteamento na aplicação
+
+// Aplicar localização:
+app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
 app.UseAuthorization(); // Define que a aplicação usará sistema de autorização (caso tenha autenticação implementada).
 

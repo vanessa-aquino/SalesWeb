@@ -23,10 +23,10 @@ namespace SalesWeb.Data
             }
             var departments = new List<Department>
             {
-            new Department(1, "Electronics"),
-            new Department(2, "Home appliances"),
-            new Department(3, "Furniture & Decoration"),
-            new Department(4, "Sports & Leisure"),
+            new Department(1, "Eletrônicos"),
+            new Department(2, "Eletrodomésticos"),
+            new Department(3, "Móveis e Decoração"),
+            new Department(4, "Esportes e Lazer"),
             };
 
             await _context.Department.AddRangeAsync(departments);
