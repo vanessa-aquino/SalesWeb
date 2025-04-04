@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Vendas";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <form asp-action="SimpleSearch">
+        <fieldset>
+            <legend>Busca Simples</legend>
+            <div>
+                <label for="minDate">Data mínima</label>
+                <div>
+                    <input type="date" name="minDate" />
+                </div>
+            </div>
+            <div>
+                <label for="maxDate">Data máxima</label>
+                <div>
+                    <input type="date" name="maxDate" />
+                </div>
+            </div>
+            <div>
+                <div>
+                    <button type="submit">Buscar</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<div>
+    <div>
+        <form asp-action="GroupingSearch">
+            <fieldset>
+                <legend>Busca por grupo</legend>
+                <div>
+                    <label for="minDate">Data mínima</label>
+                    <div>
+                        <input type="date" name="minDate" />
+                    </div>
+                </div>
+                <div>
+                    <label for="maxDate">Data máxima</label>
+                    <div>
+                        <input type="date" name="maxDate" />
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <button type="submit">Buscar</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

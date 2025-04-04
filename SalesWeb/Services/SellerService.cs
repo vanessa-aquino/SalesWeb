@@ -33,14 +33,22 @@ namespace SalesWeb.Services
 
         public async Task Remove(int id)
         {
-            var obj = await _context.Seller.FindAsync(id);
-            _context.Remove(obj);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var obj = await _context.Seller.FindAsync(id);
+                _context.Remove(obj);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                throw new IntegrityException("Can't delete seller because he/she has sales");
+            }
         }
 
         public async Task Update(Seller seller)
         {
-            if (!_context.Seller.Any(x => x.Id == seller.Id))
+            bool hasAny = await _context.Seller.AnyAsync(x => x.Id == seller.Id);
+            if (!hasAny)
             {
                 throw new NotFoundException("Id not found");
             }
