@@ -17,6 +17,7 @@ mySqlOptions => mySqlOptions.MigrationsAssembly("SalesWeb"))); // Indica onde as
 builder.Services.AddScoped<SeedingService>();
 builder.Services.AddScoped<SellerService>();
 builder.Services.AddScoped<DepartmentService>();
+builder.Services.AddScoped<SalesRecordService>();
 
 // Add o suporte para MVC, permitindo que a aplicação utilize Controllers e Views
 builder.Services.AddControllersWithViews();
