@@ -27,8 +27,9 @@ namespace SalesWeb.Models
         [DisplayFormat(DataFormatString = "R$ {0:F2}")]
         public double BaseSalary { get; set; }
 
-        public Department Department { get; set; }
         [Display(Name = "Departamento")]
+        public Department Department { get; set; }
+
         public int DepartmentId { get; set; }
         public ICollection<SalesRecord> Sales { get; private set; } = new List<SalesRecord>();
 

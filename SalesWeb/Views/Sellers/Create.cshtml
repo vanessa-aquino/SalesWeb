@@ -24,7 +24,7 @@
             </div>
             <div>
                 <label asp-for="Seller.BirthDate">Data de nascimento</label>
-                <input asp-for="Seller.BirthDate" />
+                <input asp-for="Seller.BirthDate" type="date"/>
                 <span asp-validation-for="Seller.BirthDate"></span>
 
             </div>
@@ -36,11 +36,14 @@
             </div>
             <div>
                 <label asp-for="Seller.DepartmentId"></label>
-                <select asp-for="Seller.DepartmentId" asp-items="@(new SelectList(Model.Departments, "Id", "Name"))"></select>
+                <select asp-for="Seller.DepartmentId" asp-items="@(new SelectList(Model.Departments, "Id", "Name"))">
+                    <option value="">Selecione</option>
+                </select>
+                <span asp-validation-for="Seller.DepartmentId"></span>
                 @*O asp-item preenche automaticamente um select com uma lista de opções*@
             </div>
             <div>
-                <input type="submit" value="Create" />
+                <input type="submit" value="Adicionar" />
             </div>
         </form>
     </div>

@@ -35,7 +35,7 @@ namespace SalesWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Seller seller)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var departmenst = await _departmentService.FindAll();
                 var viewModel = new SellerFormViewModel { Seller = seller, Departments = departmenst };
@@ -116,7 +116,6 @@ namespace SalesWeb.Controllers
             {
                 return RedirectToAction(nameof(Error), new { message = err.Message });
             }
-
         }
 
         public IActionResult Error(string message)

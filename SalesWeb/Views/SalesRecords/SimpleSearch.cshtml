@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<SalesWeb.Models.SalesRecord>;
 
 @{
-    ViewData["Title"] = "Busca Simples";
+    ViewData["Title"] = "Vendas";
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -10,13 +10,13 @@
     <div>
         <form role="search">
             <div>
-                <label for="minDate">Data mínima</label>
+                <label for="minDate">Data Inicial</label>
                 <div>
                     <input type="date" name="minDate" value=@ViewData["minDate"] />
                 </div>
             </div>
             <div>
-                <label for="maxDate">Data máxima</label>
+                <label for="maxDate">Data Final</label>
                 <div>
                     <input type="date" name="maxDate" value=@ViewData["maxDate"] />
                 </div>
@@ -27,6 +27,9 @@
                 </div>
             </div>
         </form>
+    </div>
+    <div>
+        <a asp-action="Index">Voltar</a>
     </div>
 </nav>
 <div>

@@ -6,7 +6,6 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<h4>Vendedor</h4>
 <hr />
 <div>
     <div>
@@ -40,11 +39,14 @@
                 <select asp-for="Seller.DepartmentId" asp-items="@(new SelectList(Model.Departments, "Id", "Name"))"></select>
             </div>
             <div>
-                <input type="submit" value="Save" />
+                <input type="submit" value="Salvar" />
             </div>
         </form>
     </div>
 </div>
+<div>
+</div>
+<a asp-action="Index">Voltar para a lista</a>
 
 @section Scripts {
     @{
