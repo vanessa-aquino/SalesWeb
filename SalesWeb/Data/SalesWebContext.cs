@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using SalesWeb.Models;
 
 
 namespace SalesWeb.Data
 {
-    public class SalesWebContext : DbContext // -DbContext é a classe central do Entity para trabalhar com banco de dados
+    public class SalesWebContext : IdentityDbContext // -DbContext é a classe central do Entity para trabalhar com banco de dados
     {
         // O construtor recebe as opções de configuração e as passa para a classe dbCOntext através do : base(options)
         public SalesWebContext (DbContextOptions<SalesWebContext> options)
