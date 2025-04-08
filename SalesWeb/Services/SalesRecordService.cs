@@ -13,7 +13,12 @@ namespace SalesWeb.Services
             _context = context;
         }
 
-        public async Task<List<SalesRecord>> FindByDate(DateTime? minDate, DateTime? maxDate)
+        public async Task<List<Department>> GetDepartments()
+        {
+            return await _context.Department.OrderBy(dep => dep.Name).ToListAsync();
+        }
+
+        public async Task<List<SalesRecord>> FindByDate(DateTime? minDate, DateTime? maxDate, string sellerName)
         {
             // Pega o meu SalesRecords, que é do tipo DbSet (corresponde a uma tableda do banco de dados e permite que vc execute consultas e operações de manipulação de dados)
             // E constroi um objeto (result) do tipo IQueryable, me permitindo consultas de forma dinâmica ao banco de dados.
@@ -21,6 +26,7 @@ namespace SalesWeb.Services
 
             if(minDate.HasValue) result = result.Where(x => x.Date >= minDate.Value);
             if(maxDate.HasValue) result = result.Where(x => x.Date <= maxDate.Value);
+            if(!string.IsNullOrEmpty(sellerName)) result = result.Where(x => x.Seller.Name.ToLower().Contains(sellerName.ToLower()));
 
             return await result
                 .Include(x  => x.Seller)
@@ -29,12 +35,14 @@ namespace SalesWeb.Services
                 .ToListAsync();       
         }
 
-        public async Task<List<IGrouping<Department, SalesRecord>>> FindByDateGrouping(DateTime? minDate, DateTime? maxDate)
+        public async Task<List<IGrouping<Department, SalesRecord>>> FindByDateGrouping(DateTime? minDate, DateTime? maxDate, string sellerName, int? departmentId)
         {
             var result = from obj in _context.SalesRecords select obj;
 
             if (minDate.HasValue) result = result.Where(x => x.Date >= minDate.Value);
             if (maxDate.HasValue) result = result.Where(x => x.Date <= maxDate.Value);
+            if(!string.IsNullOrEmpty(sellerName)) result = result.Where(x => x.Seller.Name.ToLower().ToLower().Contains(sellerName.ToLower()));
+            if(departmentId.HasValue) result = result.Where(x => x.Seller.Department.Id == departmentId.Value);
 
             return await result
                 .Include(x => x.Seller)

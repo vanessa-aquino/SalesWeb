@@ -24,9 +24,26 @@
                 </div>
             </div>
             <div>
+                <label for="sellerName">Vendedor</label>
                 <div>
-                    <button type="submit">Filtrar</button>
+                    <input type="text" name="sellerName" value="@ViewData["sellerName"]" />
                 </div>
+            </div>
+            <div>
+                <label for="depratmentId">Departamento</label>
+                <div>
+                    <select name="departmentId">
+                        <option value="">Todos</option>
+                        @foreach (var dept in (SelectList)ViewBag.Departments)
+                        {
+                            var selected = dept.Value == ViewData["departmentId"]?.ToString() ? "selected" : "";
+                            @: <option value="@dept.Value" @selected>@dept.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="submit">Filtrar</button>
             </div>
         </form>
     </div>
