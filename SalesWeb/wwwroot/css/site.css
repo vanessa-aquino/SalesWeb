@@ -1,5 +1,6 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    background: #FBF4F4;
 }
 
 @media (min-width: 768px) {
@@ -13,8 +14,8 @@ html {
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
@@ -28,4 +29,13 @@ body {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
+}
+
+bg-pages {
+    background: #FBF4F4;
+}
+
+.bg-main {
+    background: #F24D0D;
+    color: #FFFFFF;
 }
