@@ -1,10 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+// A aplicação utiliza dois DbContexts distintos:
+// - SalesWebContext: responsável pelas tabelas e lógica de negócio da aplicação (vendas, departamentos, etc).
+// - ApplicationDbContext: responsável pelas tabelas e funcionalidades do ASP.NET Identity (usuários, autenticação, etc).
+// Ambos usam o mesmo banco de dados MySQL, mas são separados para manter uma organização clara entre as responsabilidades.
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using SalesWeb.Data;
 using SalesWeb.Services;
 using Microsoft.Extensions.Options;
+using SalesWeb.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args); // Contrutor da aplicação com as configurações iniciais
 
@@ -14,12 +20,19 @@ builder.Services.AddDbContext<SalesWebContext> // Registro do SalesWeb (classe q
 ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("SalesWebContext")), // Detecta automáticamente a versão do MySQL a partir da conexão
 mySqlOptions => mySqlOptions.MigrationsAssembly("SalesWeb"))); // Indica onde as migrações do banco serão armazenadas
 
+// Configurando o Application db context:
+builder.Services.AddDbContext<ApplicationDbContext>
+(options => options.UseMySql(builder.Configuration.GetConnectionString("SalesWebContext"),
+ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("SalesWebContext")),
+mySqlOptions => mySqlOptions.MigrationsAssembly("SalesWeb")));
+
+
 // Configuração do Identity (autenticação e gerenciamento de usuários):
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
 })
-    .AddEntityFrameworkStores<SalesWebContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Registrar os serviços customizados:
 builder.Services.AddScoped<SeedingService>();

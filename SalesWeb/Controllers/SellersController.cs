@@ -4,9 +4,11 @@ using SalesWeb.Models;
 using SalesWeb.Services;
 using SalesWeb.ViewModels;
 using SalesWeb.Services.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SalesWeb.Controllers
 {
+    [Authorize]
     public class SellersController : Controller
     {
         private readonly SellerService _sellerService;

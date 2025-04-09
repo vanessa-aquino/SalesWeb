@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SalesWeb.Data;
 using SalesWeb.Models;
 
 namespace SalesWeb.Controllers
 {
+    [Authorize]
     public class DepartmentsController : Controller
     {
         private readonly SalesWebContext _context; // Representação do banco de dados

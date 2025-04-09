@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SalesWeb.Services;
 
 namespace SalesWeb.Controllers
 {
+    [Authorize]
     public class SalesRecordsController : Controller
     {
         private readonly SalesRecordService _salesRecordService;
