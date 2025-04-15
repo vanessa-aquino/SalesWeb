@@ -52,7 +52,7 @@ body {
 }
 
 .navbar-toggler {
-    border: 1px solid white;
+    border: 1px solid #C43C08;
 }
 
     .navbar-toggler:focus {
@@ -66,9 +66,6 @@ body {
         align-items: start;
     }
 }
-
-
-
 
 /*Estilização Personalizada*/
 bg-pages {
@@ -105,13 +102,27 @@ bg-pages {
         transform-origin: left;
     }
 
-    .hover-underline-animation.active::after {
-        transform: scale(1);
-        transform-origin: left;
+@media (max-width: 768px) {
+    .hover-underline-animation::after {
+        display: none;
     }
+
+    .hover-underline-animation.active {
+        color: #C43C08 !important;
+    }
+}
+
+.hover-underline-animation.active::after {
+    transform: scale(1);
+    transform-origin: left;
+}
 
 .border-header {
     border-bottom: 2px solid #C43C08;
+}
+
+.border-footer {
+    border-top: 2px solid #C43C08;
 }
 
 .teste {
@@ -119,12 +130,36 @@ bg-pages {
 }
 
 .container {
-    border: 2px solid black;
     padding: 0 12px;
     max-width: none;
 }
 
-.container > main {
-    margin: 0;
+    .container > main {
+        margin: 0;
+    }
+
+.buttons-home {
+    background-color: #F24D0D;
+    width: 200px;
+    height: 70px;
+    border: none;
+    color: white;
+    padding: 20px 16px;
+    text-transform: uppercase;
 }
 
+@media (max-width: 991.98px) {
+    .buttons-home {
+        width: 100% !important;
+    }
+}
+
+.buttons-home:hover {
+    background-color: #C43C08;
+}
+
+.buttons-home:focus {
+    border: none;
+    box-shadow: none;
+    background-color: #C43C08;
+}

@@ -2,22 +2,20 @@
     ViewData["Title"] = "Início";
 }
 
-<div class="bg-pages d-flex flex-row justify-content-evenly align-content-center pt-3">
-    <div class="teste d-flex flex-column justify-content-center">
-        <h2 class="display-4">Gerencie aqui sua equipe</h2>
-        <div class="teste">
-            <a asp-area="" asp-controller="Departments" asp-action="Index">
-                <button>Departamentos</button>
-            </a>
-            <a asp-area="" asp-controller="Sellers" asp-action="Index">
-                <button>Vendedores</button>
-            </a>
-            <a asp-area="" asp-controller="SalesRecords" asp-action="Index">
-                <button>Vendas</button>
-            </a>
+<div class="bg-pages d-flex flex-column flex-lg-row justify-content-evenly align-items-center pt-3 gap-2 mb-4">
+    <div class="d-block d-lg-none mt-2">
+        <h2 class="display-3" style="font-weight: 500">Gerencie aqui sua <span style="color: #C43C08">equipe</span></h2>
+        <img src="~/images/homepage2.png" class="img-fluid" />
+    </div>
+    <div class="d-flex flex-column justify-content-center w-100">
+        <h2 class="display-3 d-none d-lg-block" style="font-weight: 500">Gerencie aqui sua <span style="color: #C43C08">equipe</span></h2>
+        <div class="d-flex flex-column flex-lg-row  justify-content-start gap-3 mt-4">
+            <a asp-area="" asp-controller="Departments" asp-action="Index" class="btn btn-primary btn-lg buttons-home">Departamentos</a>
+            <a asp-area="" asp-controller="Sellers" asp-action="Index" class="btn btn-primary btn-lg buttons-home">Vendedores</a>
+            <a asp-area="" asp-controller="SalesRecords" asp-action="Index" class="btn btn-primary btn-lg buttons-home">Vendas</a>
         </div>
     </div>
-    <div class="teste ">
-        <img src="~/images/homepage2.png" />
+    <div class="d-none d-lg-block">
+        <img src="~/images/homepage2.png" style="max-width: 1000px;" />
     </div>
 </div>
