@@ -4069,7 +4069,7 @@ textarea.form-control-lg {
   width: 1.5em;
   height: 1.5em;
   vertical-align: middle;
-  background-image: var(--bs-navbar-toggler-icon-bg);
+  background-image: url(');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;
