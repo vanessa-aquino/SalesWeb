@@ -4,33 +4,35 @@
     ViewData["Title"] = "Departamentos";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 class="display-5 mt-3 padding-pages">@ViewData["Title"]</h1>
 
-<p>
-    <a asp-action="Create">Adicionar novo departamento</a>
+<p class="padding-pages" style=" color: #F24D0D;">
+    <a asp-action="Create" class="hover-underline-animation hover-fix-departamento"><img src="~/images/add.png" width="24px" height="24px" /> Novo departamento</a>
 </p>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="d-flex justify-content-start padding-pages" style="max-width: 1000px;">
+    <table class="table table-hover bg-pages table-shadow">
+        <thead>
+            <tr>
+                <th class="text-white h5" style="background-color: #C43C08;">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th class="text-white h5" style="background-color: #C43C08;">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="fs-6" style="background-color: #fffcff;">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td class="d-flex gap-4" style="background-color: #fffcff;">
+                        <a asp-action="Details" asp-route-id="@item.Id"><img src="~/images/details.png" width="24px" height="24px" /></a>
+                        <a asp-action="Edit" asp-route-id="@item.Id"><img src="~/images/edit.png" width="24px" height="24px"/></a>
+                        <a asp-action="Delete" asp-route-id="@item.Id"><img src="~/images/remove.png" width="24px" height="24px" /></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

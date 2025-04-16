@@ -101,6 +101,9 @@ bg-pages {
         transform: scale(1);
         transform-origin: left;
     }
+.hover-fix-departamento::after {
+    bottom: -2.5px; 
+}
 
 @media (max-width: 768px) {
     .hover-underline-animation::after {
@@ -159,7 +162,30 @@ bg-pages {
 }
 
 .buttons-home:focus {
-    border: none;
-    box-shadow: none;
-    background-color: #C43C08;
+    border: none !important;
+    box-shadow: none !important;
+    background-color: #C43C08 !important;
 }
+
+.table-shadow {
+    box-shadow: 10px 10px 5px 0px rgba(242,77,13,0.75);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(242,77,13,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(242,77,13,0.75);
+}
+
+.padding-pages {
+    padding: 0.3rem 4rem;
+}
+
+@media (max-width: 576px) {
+    .padding-pages {
+        padding: 0.3rem 1rem;
+    }
+}
+
+a:visited {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+
