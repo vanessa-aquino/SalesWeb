@@ -4,9 +4,9 @@
     ViewData["Title"] = "Editar";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 class="display-5 mt-3 padding-pages">@ViewData["Title"]</h1>
 
-<hr />
+<div class="padding-pages">
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -28,6 +28,7 @@
     <a asp-action="Index">Voltar</a>
 </div>
 
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

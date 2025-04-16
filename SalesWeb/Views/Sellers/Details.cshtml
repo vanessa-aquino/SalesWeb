@@ -3,45 +3,43 @@
     ViewData["Title"] = "Detalhes";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h1 class="display-5 mt-3 padding-pages">@ViewData["Title"]</h1>
 
-<div>
-    <h4>Detalhes</h4>
-    <hr />
-    <dl>
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
+<div class="padding-pages">
+    <dl class="row">
+        <dt class="col-sm-3 h5 mb-3" style="color: #F24D0D">
+            @Html.DisplayNameFor(model => model.Name):
         </dt>
-        <dd>
+        <dd class="col-sm-9 h5 mb-3">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
+        <dt class="col-sm-3 h5 mb-3" style="color: #F24D0D">
+            @Html.DisplayNameFor(model => model.Email):
         </dt>
-        <dd>
+        <dd class="col-sm-9 h5 mb-3">
             @Html.DisplayFor(model => model.Email)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.BirthDate)
+        <dt class="col-sm-3 h5 mb-3" style="color: #F24D0D">
+            @Html.DisplayNameFor(model => model.BirthDate):
         </dt>
-        <dd>
+        <dd class="col-sm-9 h5 mb-3">
             @Html.DisplayFor(model => model.BirthDate)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.BaseSalary)
+        <dt class="col-sm-3 h5 mb-3" style="color: #F24D0D;">
+            @Html.DisplayNameFor(model => model.BaseSalary):
         </dt>
-        <dd>
+        <dd class="col-sm-9 h5 mb-3">
             @Html.DisplayFor(model => model.BaseSalary)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Department)
+        <dt class="col-sm-3 h5 mb-3" style="color: #F24D0D">
+            @Html.DisplayNameFor(model => model.Department):
         </dt>
-        <dd>
+        <dd class="col-sm-9 h5 mb-3">
             @Html.DisplayFor(model => model.Department.Name)
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a>
-    <a asp-action="Index">Voltar para a lista</a>
+<div class="padding-pages d-flex gap-3">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary buttons-crud">Editar</a>
+    <a asp-action="Index" class="btn btn-outline-primary buttons-crud">Voltar</a>
 </div>

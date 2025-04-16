@@ -23,10 +23,10 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td class="fs-6" style="background-color: #fffcff;">
+                    <td class="fs-6">
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
-                    <td class="d-flex gap-4" style="background-color: #fffcff;">
+                    <td class="d-flex gap-4">
                         <a asp-action="Details" asp-route-id="@item.Id"><img src="~/images/details.png" width="24px" height="24px" /></a>
                         <a asp-action="Edit" asp-route-id="@item.Id"><img src="~/images/edit.png" width="24px" height="24px"/></a>
                         <a asp-action="Delete" asp-route-id="@item.Id"><img src="~/images/remove.png" width="24px" height="24px" /></a>
