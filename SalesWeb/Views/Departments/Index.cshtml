@@ -4,12 +4,12 @@
     ViewData["Title"] = "Departamentos";
 }
 
-<h1 class="display-5 mt-3 padding-pages">@ViewData["Title"]</h1>
+<h1 class="display-5 mt-3">@ViewData["Title"]</h1>
 
-<p class="padding-pages" style=" color: #F24D0D;">
-    <a asp-action="Create" class="hover-underline-animation hover-fix-departamento"><img src="~/images/add.png" width="24px" height="24px" /> Novo departamento</a>
+<p style=" color: #F24D0D;">
+    <a asp-action="Create"><img src="~/images/add.png" width="24px" height="24px" /> Novo departamento</a>
 </p>
-<div class="d-flex justify-content-start padding-pages" style="max-width: 1000px;">
+<div class="d-flex justify-content-start" style="max-width: 1000px;">
     <table class="table table-hover bg-pages table-shadow">
         <thead>
             <tr>

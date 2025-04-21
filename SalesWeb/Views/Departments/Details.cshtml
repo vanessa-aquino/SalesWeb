@@ -4,19 +4,19 @@
     ViewData["Title"] = "Detalhes";
 }
 
-<h1 class="display-5 mt-3 padding-pages">@ViewData["Title"]</h1>
+<h1 class="display-5 mt-3">@ViewData["Title"]</h1>
 
-<div class="padding-pages">
+<div>
     <dl class="row">
-        <dt class="col-sm-2 h5" style=" color: #F24D0D;">
+        <dt class="col-4 col-sm-2 h5" style=" color: #F24D0D;">
             @Html.DisplayNameFor(model => model.Name):
         </dt>
-        <dd class="col-sm-10 h5">
+        <dd class="col-8 col-sm-10 h5">
             @Html.DisplayFor(model => model.Name)
         </dd>
     </dl>
 </div>
-<div class="padding-pages d-flex gap-3">
+<div class="mt-3">
     <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-outline-primary buttons-crud">Editar</a>
     <a asp-action="Index" class="btn btn-outline-primary buttons-crud">Voltar</a>
 </div>

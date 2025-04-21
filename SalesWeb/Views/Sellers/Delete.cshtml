@@ -4,43 +4,41 @@
     ViewData["Title"] = "Deletar Vendedor";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h1 class="display-5 mt-3">@ViewData["Title"]</h1>
 
-<h3>Deseja mesmo deletar esse vendedor?</h3>
-
+<p class="fs-4" style="color: #C43C08;">Deseja mesmo deletar esse vendedor?</p>
 <div>
-    <h4>Vendedor</h4>
-    <hr />
-    <dl>
-        <dt>
+    <dl class="row">
+        <dt class="col-4 col-sm-2 h5" style="color: #F24D0D;">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd>
+        <dd class="col-8 col-sm-10 h5">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt>
+        <dt class="col-4 col-sm-2 h5" style="color: #F24D0D;">
             @Html.DisplayNameFor(model => model.Email)
         </dt>
-        <dd>
+        <dd class="col-8 col-sm-10 h5">
             @Html.DisplayFor(model => model.Email)
         </dd>
-        <dt>
+        <dt class="col-4 col-sm-2 h5" style="color: #F24D0D;">
             @Html.DisplayNameFor(model => model.BirthDate)
         </dt>
-        <dd>
+        <dd class="col-8 col-sm-10 h5">
             @Html.DisplayFor(model => model.BirthDate)
         </dd>
-        <dt>
+        <dt class="col-4 col-sm-2 h5" style="color: #F24D0D;">
             @Html.DisplayNameFor(model => model.BaseSalary)
         </dt>
-        <dd>
+        <dd class="col-8 col-sm-10 h5">
             @Html.DisplayFor(model => model.BaseSalary)
         </dd>
     </dl>
-
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" /> @*Campo oculto para enviar o código do vendedor que está sendo deletado*@
-        <input type="submit" value="Deletar" />
-        <a asp-action="Index">Voltar para a lista</a>
+        <div class="mt-3">
+            <input type="submit" value="Deletar" class="btn btn-outline-danger button-danger"/>
+            <a asp-action="Index" class="btn btn-outline-primary buttons-crud">Voltar</a>
+        </div>
     </form>
 </div>

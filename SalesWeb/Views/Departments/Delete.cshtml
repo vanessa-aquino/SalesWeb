@@ -4,23 +4,23 @@
     ViewData["Title"] = "Deletar";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 class="display-5 mt-3">@ViewData["Title"]</h1>
 
-<h3>Tem certeza que você deseja deletar esse departamento?</h3>
+<p class="fs-4" style="color: #C43C08;">Deseja mesmo deletar esse departamento?</p>
 <div>
-    <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+        <dt class="col-4 col-sm-2 h5" style="color: #F24D0D;">
+            @Html.DisplayNameFor(model => model.Name):
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-8 col-sm-10 h5">
             @Html.DisplayFor(model => model.Name)
         </dd>
     </dl>
-    
     <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Deletar" class="btn btn-danger" /> 
-        <a asp-action="Index">Voltar</a>
+            <input type="hidden" asp-for="Id" />
+        <div class="mt-3">
+            <input type="submit" value="Deletar" class="btn btn-outline-danger button-danger" />
+            <a asp-action="Index" class="btn btn-outline-primary buttons-crud">Voltar</a>
+        </div>
     </form>
 </div>

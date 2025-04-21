@@ -66,6 +66,20 @@ body {
         align-items: start;
     }
 }
+.table-responsive::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background-color: #C43C08; 
+    border-radius: 10px;
+    border: 2px solid #f1f1f1;
+}
 
 /*Estilização Personalizada*/
 bg-pages {
@@ -208,14 +222,7 @@ a:visited {
     }
 }
 
-.buttons-crud:hover {
-    border: 2px solid #F24D0D;
-    background: none;
-    box-shadow: 0px 1px 8px 3px rgba(242,77,13,0.24);
-    -webkit-box-shadow: 0px 1px 8px 3px rgba(242,77,13,0.24);
-    -moz-box-shadow: 0px 1px 8px 3px rgba(242,77,13,0.24);
-}
-
+.buttons-crud:hover,
 .buttons-crud:focus,
 .buttons-crud:active {
     border: 2px solid #F24D0D !important;
@@ -224,6 +231,34 @@ a:visited {
     -webkit-box-shadow: 0px 1px 8px 3px rgba(242,77,13,0.24);
     -moz-box-shadow: 0px 1px 8px 3px rgba(242,77,13,0.24);
 }
+
+.button-danger {
+    border: 2px solid #DC3545;
+    color: #DC3545;
+}
+@media (max-width: 991.98px) {
+    .button-danger {
+        width: 100% !important;
+    }
+
+        .button-danger:first-child {
+            background-color: #DC3545 !important;
+            margin-bottom: 4px !important;
+            color: white !important;
+        }
+}
+
+.button-danger:hover,
+.button-danger:focus,
+.button-danger:active {
+    border: 2px solid #DC3545;
+    background: none !important;
+    color: #DC3545;
+    box-shadow: 0px 1px 8px 3px rgba(220,53,69,0.24);
+    -webkit-box-shadow: 0px 1px 8px 3px rgba(220,53,69,0.24);
+    -moz-box-shadow: 0px 1px 8px 3px rgba(220,53,69,0.24);
+}
+
 
 .custom-input {
     border: 2px solid #ADADAD;
@@ -245,3 +280,25 @@ a:visited {
     -moz-box-shadow: 0px 1px 8px 3px rgba(242,77,13,0.24);
 }
 
+::-webkit-scrollbar {
+    width: 8px; 
+}
+
+::-webkit-scrollbar-horizontal {
+    height: 8px; 
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #C43C08; 
+    border-radius: 10px; 
+    border: 2px solid #f1f1f1; 
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #C43C08 #f1f1f1;
+}
