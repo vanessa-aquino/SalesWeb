@@ -20,7 +20,7 @@
 <body>
     <header class="border-header">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm bg-main border-header padding-pages">
-            <div class="container-fluid">
+            <div class="container-fluid p-0">
                 <a class="navbar-brand text-white fs-3" asp-area="" asp-controller="Home" asp-action="Index">SalesWeb</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -46,8 +46,8 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="container padding-pages">
+        <main role="main" class="pb-4">
             @RenderBody()
         </main>
     </div>
