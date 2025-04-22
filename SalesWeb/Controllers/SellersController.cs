@@ -100,7 +100,7 @@ namespace SalesWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Seller seller)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var departmenst = await _departmentService.FindAll();
                 var viewModel = new SellerFormViewModel { Seller = seller, Departments = departmenst };
