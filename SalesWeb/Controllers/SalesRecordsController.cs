@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Globalization;
+using System.Text;
 using SalesWeb.Services;
+using SalesWeb.Extensions;
 
 namespace SalesWeb.Controllers
 {
@@ -48,5 +51,33 @@ namespace SalesWeb.Controllers
             var result = await _salesRecordService.FindByDateGrouping(minDate, maxDate, sellerName, departmentId);
             return View(result);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ExportCsv(DateTime? minDate, DateTime? maxDate, string sellerName)
+        {
+            if (!minDate.HasValue) minDate = new DateTime(DateTime.Now.Year, 1, 1);
+            if (!maxDate.HasValue) maxDate = DateTime.Now;
+
+            var records = await _salesRecordService.FindByDate(minDate, maxDate, sellerName);
+            var uS = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
+            var lines = new List<string>
+            {
+                $"Id{uS}Data{uS}Vendedor{uS}Departamento{uS}Valor{uS}Status"
+            };
+
+            foreach (var r in records)
+            {
+                var line = $"{r.Id}{uS}{r.Date:dd/MM/yyyy}{uS}{r.Seller.Name}{uS}{r.Seller.Department.Name}{uS}R${r.Amount:F2}{uS}{r.Status.GetDisplayName()}";
+                lines.Add(line);
+            }
+
+            var csv = string.Join(Environment.NewLine, lines);
+            var bytes = Encoding.UTF8.GetPreamble().Concat(Encoding.UTF8.GetBytes(csv)).ToArray();
+            var fileName = $"Relatorio_Vendas_{DateTime.Now:yyyyMMdd}.csv";
+
+            return File(bytes, "text/csv", fileName);
+
+        }
     }
 }
+

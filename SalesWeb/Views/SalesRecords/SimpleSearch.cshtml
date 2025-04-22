@@ -33,6 +33,14 @@
         </form>
     </div>
     <div>
+        <form asp-action="ExportCsv" method="get">
+            <input type="hidden" name="minDate" value="@ViewData["minDate"]"/>
+            <input type="hidden" name="maxDate" value="@ViewData["maxDate"]"/>
+            <input type="hidden" name="sellerName" value="@ViewData["sellerName"]" />
+            <button type="submit">Baixar Relatório</button>
+        </form>
+    </div>
+    <div>
         <a asp-action="Index">Voltar</a>
     </div>
 </nav>
