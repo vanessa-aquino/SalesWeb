@@ -30,6 +30,7 @@ namespace SalesWeb.Models
         [Display(Name = "Departamento")]
         public Department Department { get; set; }
 
+        [Required(ErrorMessage = "Selecione um departamento")]
         public int DepartmentId { get; set; }
         public ICollection<SalesRecord> Sales { get; private set; } = new List<SalesRecord>();
 

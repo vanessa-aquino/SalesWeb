@@ -6,6 +6,7 @@ namespace SalesWeb.Models
     public class Department
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "{0} obrigatório")]
         [Display(Name = "Nome")]
         public string Name { get; set; }
         public ICollection<Seller> Sellers { get; set; } = new List<Seller>();
