@@ -2,56 +2,45 @@
     ViewData["Title"] = "Vendas";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h1 class="display-5 mt-3">@ViewData["Title"]</h1>
 
-<div>
-    <form asp-action="SimpleSearch">
-        <fieldset>
-            <legend>Busca Simples</legend>
-            <div>
-                <label for="minDate">Data mínima</label>
-                <div>
-                    <input type="date" name="minDate" />
-                </div>
-            </div>
-            <div>
-                <label for="maxDate">Data máxima</label>
-                <div>
-                    <input type="date" name="maxDate" />
-                </div>
-            </div>
-            <div>
-                <div>
-                    <button type="submit">Buscar</button>
-                </div>
-            </div>
-        </fieldset>
-    </form>
-</div>
-
-<div>
-    <div>
-        <form asp-action="GroupingSearch">
+<div class="mt-3 d-flex flex-column flex-md-row gap-md-5">
+    <div class="d-flex flex-column" style="flex: 1 1 260px; max-width: 100%; width: 100%;">
+        <form asp-action="SimpleSearch">
             <fieldset>
-                <legend>Busca por grupo</legend>
-                <div>
-                    <label for="minDate">Data mínima</label>
-                    <div>
-                        <input type="date" name="minDate" />
-                    </div>
+                <legend class="h5 mb-3" style="border-bottom: 4px double #F24D0D;">Busca por Vendedor</legend>
+                <div class="mt-2">
+                    <label for="minDate" class="form-label mb-1 fs-6" style="color: #C43C08;">Data mínima</label>
+                    <input type="date" name="minDate" class="form-control custom-input" />
                 </div>
-                <div>
-                    <label for="maxDate">Data máxima</label>
-                    <div>
-                        <input type="date" name="maxDate" />
-                    </div>
+                <div class="mt-2">
+                    <label for="maxDate" class="form-label mb-1 fs-6" style="color: #C43C08;">Data máxima</label>
+                    <input type="date" name="maxDate" class="form-control custom-input" />
                 </div>
-                <div>
-                    <div>
-                        <button type="submit">Buscar</button>
-                    </div>
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-outline-primary buttons-crud">Buscar</button>
                 </div>
             </fieldset>
         </form>
     </div>
+
+    <div class="d-flex flex-column" style="flex: 1 1 260px; max-width: 100%; width: 100%;">
+        <form asp-action="GroupingSearch">
+            <fieldset>
+                <legend class="h5 mb-3" style="border-bottom: 4px double #F24D0D;">Busca por Departamento</legend>
+                <div class="mt-2">
+                    <label for="minDate" class="form-label mb-1 fs-6" style="color:#C43C08;">Data mínima</label>
+                    <input type="date" name="minDate" class="form-control custom-input" />
+                </div>
+                <div class="mt-2">
+                    <label for="maxDate" class="form-label mb-1 fs-6" style="color: #C43C08;">Data máxima</label>
+                    <input type="date" name="maxDate" class="form-control custom-input" />
+                </div>
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-outline-primary buttons-crud">Buscar</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
 </div>

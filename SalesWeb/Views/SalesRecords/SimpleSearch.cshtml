@@ -4,45 +4,26 @@
     ViewData["Title"] = "Vendas";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h1 class="display-5 mt-3">@ViewData["Title"]</h1>
 
-<nav>
-    <div>
-        <form role="search">
-            <div>
-                <label for="minDate">Data Inicial</label>
-                <div>
-                    <input type="date" name="minDate" value=@ViewData["minDate"] />
-                </div>
-            </div>
-            <div>
-                <label for="maxDate">Data Final</label>
-                <div>
-                    <input type="date" name="maxDate" value=@ViewData["maxDate"] />
-                </div>
-            </div>
-            <div>
-                <label for="sellerName">Vendedor</label>
-                <div>
-                    <input type="text" name="sellerName" value="@ViewData["sellerName"]"/>
-                </div>
-            </div>
-            <div>
-                <button type="submit">Filtrar</button>
-            </div>
-        </form>
-    </div>
-    <div>
-        <form asp-action="ExportCsv" method="get">
-            <input type="hidden" name="minDate" value="@ViewData["minDate"]"/>
-            <input type="hidden" name="maxDate" value="@ViewData["maxDate"]"/>
-            <input type="hidden" name="sellerName" value="@ViewData["sellerName"]" />
-            <button type="submit">Baixar Relatório</button>
-        </form>
-    </div>
-    <div>
-        <a asp-action="Index">Voltar</a>
-    </div>
+<nav class="d-flex bg-main rounded-2">
+    <form role="search" class="d-flex flex-column flex-md-row justify-content-between align-items-start w-100 p-2 gap-2">
+        <div class="mb-3 mb-md-0 w-100 w-md-auto">
+            <label for="minDate" class="form-label mb-1 fs-6">Data Inicial</label>
+            <input type="date" name="minDate" value=@ViewData["minDate"] class="form-control input-nav"/>
+        </div>
+        <div class="mb-3 mb-md-0 w-100 w-md-auto">
+            <label for="maxDate" class="form-label mb-1 fs-6">Data Final</label>
+            <input type="date" name="maxDate" value=@ViewData["maxDate"] class="form-control input-nav"/>
+        </div>
+        <div class="mb-3 mb-md-0 w-100 w-md-auto">
+            <label for="sellerName" class="form-label mb-1 fs-6">Vendedor</label>
+            <input type="text" name="sellerName" value="@ViewData["sellerName"]" class="form-control input-nav" placeholder="Pesquisar Vendedor"/>
+        </div>
+        <div class="align-self-end">
+            <button type="submit" class="btn btn-light buttons-nav">Filtrar</button>
+        </div>
+    </form>
 </nav>
 <div>
     <div>
@@ -102,3 +83,12 @@
         </table>
     </div>
 </div>
+<div>
+    <form asp-action="ExportCsv" method="get">
+        <input type="hidden" name="minDate" value="@ViewData["minDate"]" />
+        <input type="hidden" name="maxDate" value="@ViewData["maxDate"]" />
+        <input type="hidden" name="sellerName" value="@ViewData["sellerName"]" />
+        <button type="submit">Extrair Relatório</button>
+    </form>
+</div>
+<a asp-action="Index" class="btn btn-light buttons-nav">Voltar</a>
