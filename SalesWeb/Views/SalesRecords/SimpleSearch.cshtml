@@ -10,46 +10,43 @@
     <form role="search" class="d-flex flex-column flex-md-row justify-content-between align-items-start w-100 p-2 gap-2">
         <div class="mb-3 mb-md-0 w-100 w-md-auto">
             <label for="minDate" class="form-label mb-1 fs-6">Data Inicial</label>
-            <input type="date" name="minDate" value=@ViewData["minDate"] class="form-control input-nav"/>
+            <input type="date" name="minDate" value=@ViewData["minDate"] class="form-control input-nav" />
         </div>
         <div class="mb-3 mb-md-0 w-100 w-md-auto">
             <label for="maxDate" class="form-label mb-1 fs-6">Data Final</label>
-            <input type="date" name="maxDate" value=@ViewData["maxDate"] class="form-control input-nav"/>
+            <input type="date" name="maxDate" value=@ViewData["maxDate"] class="form-control input-nav" />
         </div>
         <div class="mb-3 mb-md-0 w-100 w-md-auto">
             <label for="sellerName" class="form-label mb-1 fs-6">Vendedor</label>
-            <input type="text" name="sellerName" value="@ViewData["sellerName"]" class="form-control input-nav" placeholder="Pesquisar Vendedor"/>
+            <input type="text" name="sellerName" value="@ViewData["sellerName"]" class="form-control input-nav" placeholder="Pesquisar Vendedor" />
         </div>
         <div class="align-self-end">
             <button type="submit" class="btn btn-light buttons-nav">Filtrar</button>
         </div>
     </form>
 </nav>
-<div>
-    <div>
-        <h3>Total das Vendas: R$@Model.Sum(obj => obj.Amount).ToString("F2")</h3>
-    </div>
-    <div>
-        <table>
+
+<div class="mt-4">
+    <div class="table-responsive">
+        <table class="table table-hover bg-pages table-shadow">
             <thead>
                 <tr>
-                    <th>
+                    <th class="text-white h6 align-middle text-nowrap" style="background-color: #C43C08;">
                         @Html.DisplayNameFor(model => model.Id)
                     </th>
-                    <th>
+                    <th class="text-white h6 align-middle text-nowrap" style="background-color: #C43C08;">
                         @Html.DisplayNameFor(model => model.Date)
-
                     </th>
-                    <th>
+                    <th class="text-white h6 align-middle text-nowrap" style="background-color: #C43C08;">
                         @Html.DisplayNameFor(model => model.Seller)
                     </th>
-                    <th>
+                    <th class="text-white h6 align-middle text-nowrap" style="background-color: #C43C08;">
                         @Html.DisplayNameFor(model => model.Seller.Department)
                     </th>
-                    <th>
+                    <th class="text-white h6 align-middle text-nowrap" style="background-color: #C43C08;">
                         @Html.DisplayNameFor(model => model.Amount)
                     </th>
-                    <th>
+                    <th class="text-white h6 align-middle text-nowrap" style="background-color: #C43C08;">
                         @Html.DisplayNameFor(model => model.Status)
                     </th>
                 </tr>
@@ -58,23 +55,22 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
+                        <td class="fs-6 text-nowrap">
                             @Html.DisplayFor(model => item.Id)
                         </td>
-                        <td>
+                        <td class="fs-6 text-nowrap">
                             @Html.DisplayFor(model => item.Date)
-
                         </td>
-                        <td>
+                        <td class="fs-6 text-nowrap">
                             @Html.DisplayFor(model => item.Seller.Name)
                         </td>
-                        <td>
+                        <td class="fs-6 text-nowrap">
                             @Html.DisplayFor(model => item.Seller.Department.Name)
                         </td>
-                        <td>
+                        <td class="fs-6 text-nowrap">
                             @Html.DisplayFor(model => item.Amount)
                         </td>
-                        <td>
+                        <td class="fs-6 text-nowrap">
                             @Html.DisplayFor(model => item.Status)
                         </td>
                     </tr>
@@ -83,12 +79,18 @@
         </table>
     </div>
 </div>
-<div>
-    <form asp-action="ExportCsv" method="get">
-        <input type="hidden" name="minDate" value="@ViewData["minDate"]" />
-        <input type="hidden" name="maxDate" value="@ViewData["maxDate"]" />
-        <input type="hidden" name="sellerName" value="@ViewData["sellerName"]" />
-        <button type="submit">Extrair Relatório</button>
+
+<div class="text-white py-1 px-2 mt-3 mt-sm-0" style="background-color: #F24D0D;">
+    <form asp-action="ExportCsv" method="get" class="d-flex flex-column flex-sm-row justify-content-between">
+        <div class="d-flex">
+            <p class="fs-4 m-0 align-middle">Total das Vendas - R$@Model.Sum(obj => obj.Amount).ToString("N2")</p>
+            <input type="hidden" name="minDate" value="@ViewData["minDate"]" />
+            <input type="hidden" name="maxDate" value="@ViewData["maxDate"]" />
+            <input type="hidden" name="sellerName" value="@ViewData["sellerName"]" />
+        </div>
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-light buttons-nav">Extrair Relatório</button>
+            <a asp-action="Index" class="btn btn-light buttons-nav">Voltar</a>
+        </div>
     </form>
 </div>
-<a asp-action="Index" class="btn btn-light buttons-nav">Voltar</a>

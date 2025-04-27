@@ -1,85 +1,64 @@
 ﻿@model IEnumerable<IGrouping<Department, SalesRecord>>;
 
 @{
-    ViewData["Title"] = "Vendas por Departamento";
+    ViewData["Title"] = "Vendas";
     DateTime minDate = DateTime.Parse(ViewData["minDate"] as string);
     DateTime maxDate = DateTime.Parse(ViewData["maxDate"] as string);
 }
 
-<h2>@ViewData["Title"]</h2>
+<h1 class="display-5 mt-3">@ViewData["Title"]</h1>
 
-<nav>
-    <div>
-        <form role="search">
-            <div>
-                <label for="minDate">Data Inicial</label>
-                <div>
-                    <input type="date" name="minDate" value=@ViewData["minDate"] />
-                </div>
-            </div>
-            <div>
-                <label for="maxDate">Data Final</label>
-                <div>
-                    <input type="date" name="maxDate" value=@ViewData["maxDate"] />
-                </div>
-            </div>
-            <div>
-                <label for="sellerName">Vendedor</label>
-                <div>
-                    <input type="text" name="sellerName" value="@ViewData["sellerName"]" />
-                </div>
-            </div>
-            <div>
-                <label for="depratmentId">Departamento</label>
-                <div>
-                    <select name="departmentId">
-                        <option value="">Todos</option>
-                        @foreach (var dept in (SelectList)ViewBag.Departments)
+<nav class="d-flex bg-main rounded-2">
+    <form role="search" class="d-flex flex-column flex-md-row justify-content-between align-items-start w-100 p-2 gap-2">
+        <div class="mb-3 mb-md-0 w-100 w-md-auto">
+           <label for="minDate" class="form-label mb-1 fs-6">Data Inicial</label>
+           <input type="date" name="minDate" value=@ViewData["minDate"] class="form-control input-nav" />
+        </div>
+        <div class="mb-3 mb-md-0 w-100 w-md-auto">
+            <label for="maxDate" class="form-label mb-1 fs-6">Data Final</label>
+            <input type="date" name="maxDate" value=@ViewData["maxDate"] class="form-control input-nav"/>
+        </div>
+        <div class="mb-3 mb-md-0 w-100 w-md-auto">
+            <label for="sellerName" class="form-label mb-1 fs-6">Vendedor</label>
+            <input type="text" name="sellerName" value="@ViewData["sellerName"]" class="form-control input-nav" placeholder="Pesquisar Vendedor"/>
+         </div>
+         <div class="mb-3 mb-md-0 w-100 w-md-auto">
+            <label for="depratmentId" class="form-label mb-1 fs-6">Departamento</label>
+            <select name="departmentId" class="form-select input-nav">
+                <option value="">Todos</option>
+                    @foreach (var dept in (SelectList)ViewBag.Departments)
                         {
                             var selected = dept.Value == ViewData["departmentId"]?.ToString() ? "selected" : "";
                             @: <option value="@dept.Value" @selected>@dept.Text</option>
                         }
-                    </select>
-                </div>
-            </div>
-            <div>
-                <button type="submit">Filtrar</button>
-            </div>
-        </form>
-    </div>
-    
-    <div>
-        <form asp-action="ExportCsv" method="get">
-            <input type="hidden" name="minDate" value="@ViewData["minDate"]"/>
-            <input type="hidden" name="maxDate" value="@ViewData["maxDate"]"/>
-            <input type="hidden" name="sellerName" value="@ViewData["sellerName"]" />
-            <button type="submit">Baixar Relatório</button>
-        </form>
-    </div>
-    <div>
-        <a asp-action="Index">Voltar</a>
-    </div>
+             </select>
+          </div>
+          <div class="align-self-end">
+            <button type="submit" class="btn btn-light buttons-nav">Filtrar</button>
+          </div>
+     </form>
 </nav>
+    
 @foreach (var departmentGroup in Model)
 {
     <div>
-        <div>
-            <h3>Departamento - @departmentGroup.Key.Name, Total de vendas: R$@departmentGroup.Key.TotalSales(minDate, maxDate).ToString("F2")</h3>
+        <div class="text-white py-1 px-2 mt-3" style="background-color: #F24D0D;">
+            <p class="fs-4 m-0 align-middle">Departamento: <span class="fw-bold">@departmentGroup.Key.Name</span> - Total de vendas: <span class="fw-bold">R$@departmentGroup.Key.TotalSales(minDate, maxDate).ToString("N2")</span></p>
         </div>
-        <div>
-            <table>
+        <div class="table-responsive">
+            <table class="table table-hover bg-pages table-shadow">
                 <thead>
                     <tr>
-                        <th>
+                        <th class="text-white h6 align-middle text-nowrap" style="background-color: #C43C08;">
                             Data
                         </th>
-                        <th>
+                        <th class="text-white h6 align-middle text-nowrap" style="background-color: #C43C08;">
                             Valor
                         </th>
-                        <th>
+                        <th class="text-white h6 align-middle text-nowrap" style="background-color: #C43C08;">
                             Vendedor
                         </th>
-                        <th>
+                        <th class="text-white h6 align-middle text-nowrap" style="background-color: #C43C08;">
                             Status
                         </th>
                     </tr>
@@ -88,16 +67,16 @@
                     @foreach (var item in departmentGroup)
                     {
                         <tr>
-                            <td>
+                            <td class="fs-6 text-nowrap">
                                 @Html.DisplayFor(model => item.Date)
                             </td>
-                            <td>
+                            <td class="fs-6 text-nowrap">
                                 @Html.DisplayFor(model => item.Amount)
                             </td>
-                            <td>
+                            <td class="fs-6 text-nowrap">
                                 @Html.DisplayFor(model => item.Seller.Name)
                             </td>
-                            <td>
+                            <td class="fs-6 text-nowrap">
                                 @Html.DisplayFor(model => item.Status)
                             </td>
                         </tr>
@@ -107,3 +86,15 @@
         </div>
     </div>
 }
+
+<div>
+    <form asp-action="ExportCsv" method="get">
+        <input type="hidden" name="minDate" value="@ViewData["minDate"]"/>
+        <input type="hidden" name="maxDate" value="@ViewData["maxDate"]"/>
+        <input type="hidden" name="sellerName" value="@ViewData["sellerName"]" />
+    <div class="d-flex gap-2 justify-content-end mt-3 mt-sm-0 align-middle">
+        <button type="submit" class="btn btn-outline-primary buttons-nav">Baixar Relatório</button>
+        <a asp-action="Index" class="btn btn-outline-primary buttons-nav">Voltar</a>
+    </div>
+    </form>
+</div>
