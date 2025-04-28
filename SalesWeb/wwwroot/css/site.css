@@ -354,3 +354,51 @@ html {
     scrollbar-width: thin;
     scrollbar-color: #C43C08 #f1f1f1;
 }
+
+input:-webkit-autofill {
+    background-color: none !important;
+    color: #3D3D3D !important;
+    -webkit-box-shadow: 0px 1px 8px 3px rgba(242,77,13,0.24);
+    -moz-box-shadow: 0px 1px 8px 3px rgba(242,77,13,0.24);
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.custom-checkbox {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ADADAD;
+    border-radius: 4px;
+    background-color: transparent;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+    .custom-checkbox:checked {
+        background-color: #F24D0D;
+        border-color: #F24D0D;
+    }
+
+    .custom-checkbox:focus,
+    .custom-checkbox:active {
+        outline: none;
+        border-color: #F24D0D;
+        box-shadow: 0px 1px 8px 3px rgba(242,77,13,0.24);
+        -webkit-box-shadow: 0px 1px 8px 3px rgba(242,77,13,0.24);
+        -moz-box-shadow: 0px 1px 8px 3px rgba(242,77,13,0.24);
+    }
+
+    /* Estilizar o "check" */
+    .custom-checkbox:checked::after {
+        content: "";
+        position: absolute;
+        top: 1px;
+        left: 5px;
+        width: 4px;
+        height: 8px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }

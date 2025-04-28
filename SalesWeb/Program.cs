@@ -6,11 +6,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using System.Globalization;
+using SalesWeb.Areas.Identity.Data;
 using SalesWeb.Data;
 using SalesWeb.Services;
-using Microsoft.Extensions.Options;
-using SalesWeb.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args); // Contrutor da aplicação com as configurações iniciais
 
@@ -26,12 +27,18 @@ builder.Services.AddDbContext<ApplicationDbContext>
 ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("SalesWebContext")),
 mySqlOptions => mySqlOptions.MigrationsAssembly("SalesWeb")));
 
+builder.Services.Configure<SendGridOptions>(options =>
+{
+    options.ApiKey = builder.Configuration["SendGridKey"];
+    options.FromEmail = builder.Configuration["SendGridFromEmail"];
+    options.FromName = builder.Configuration["SendGridFromName"];
+});
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 // Configuração do Identity (autenticação e gerenciamento de usuários):
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
-    options.SignIn.RequireConfirmedEmail = false;
 })
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddErrorDescriber<IdentityErrorDescriberPt>(); // Implementação personalizada dos erros do identity
