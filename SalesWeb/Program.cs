@@ -31,8 +31,10 @@ mySqlOptions => mySqlOptions.MigrationsAssembly("SalesWeb")));
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
+    options.SignIn.RequireConfirmedEmail = false;
 })
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddErrorDescriber<IdentityErrorDescriberPt>(); // Implementação personalizada dos erros do identity
 
 // Registrar os serviços customizados:
 builder.Services.AddScoped<SeedingService>();
