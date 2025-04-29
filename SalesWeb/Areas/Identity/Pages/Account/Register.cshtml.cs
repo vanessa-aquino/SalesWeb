@@ -130,8 +130,23 @@ namespace SalesWeb.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirme seu email",
-                        $"Por favor, confirme sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.");
+                    var emailBody = $@"
+                        <html> 
+                        <body style='font-family: Arial, sans-serif; background-color: #F4F4F4; padding: 20px;'>
+                            <div style='max-width: 600px; margin: auto; background-color: #FFF; padding: 30px; border-radius: 8px;'>
+                                <h2 style='color: #F24D0D;'>Confirmação de Email</h2>
+                                <p>Olá, Recebemos o seu cadastro!</p>
+                                <p>Para confirmar seu email, clique no botão abaixo:</p>
+                                <p style='text-align: center;'>
+                                    <a href='{HtmlEncoder.Default.Encode(callbackUrl)}' style='display: inline-block; background-color: #F24D0D; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px;'>Confirmar Email</a>
+                                </p>
+                                <p>Se você não criou essa conta, ignore este e-mail.</p>
+                                <p style='font-weight: bold'>Equipe SalesWeb</p>
+                            </div>
+                        </body>
+                        </html>";
+
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirme seu email", emailBody);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

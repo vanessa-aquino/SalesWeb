@@ -19,7 +19,7 @@ namespace SalesWeb.Services
             var client = new SendGridClient(_options.ApiKey);
             var from = new EmailAddress(_options.FromEmail, _options.FromName);
             var to = new EmailAddress(email);
-            var plainTextContent = "Para redefinir sua senha, clique no link enviado.";
+            var plainTextContent = "Clique no link enviado.";
             var message = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlMessage);
 
             try

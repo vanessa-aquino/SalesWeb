@@ -44,8 +44,8 @@ namespace SalesWeb.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Deve digitar um {0} válido")]
+            [EmailAddress(ErrorMessage = "Digite um {0} válido")]
             public string Email { get; set; }
         }
 
@@ -68,11 +68,26 @@ namespace SalesWeb.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                Console.WriteLine("Enviando email...");
+                var emailBody = $@"
+                        <html> 
+                        <body style='font-family: Arial, sans-serif; background-color: #F4F4F4; padding: 20px;'>
+                            <div style='max-width: 600px; margin: auto; background-color: #FFF; padding: 30px; border-radius: 8px;'>
+                                <h2 style='color: #F24D0D;'>Redefinir Senha</h2>
+                                <p>Olá, Recebemos a sua solicitação!</p>
+                                <p>Para redefinir sua senha, clique no botão abaixo:</p>
+                                <p style='text-align: center;'>
+                                    <a href='{HtmlEncoder.Default.Encode(callbackUrl)}' style='display: inline-block; background-color: #F24D0D; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px;'>Redefinir senha</a>
+                                </p>
+                                <p>Se você não fez essa solicitação, recomendamos que troque suas senhas e ignore este e-mail.</p>
+                                <p style='font-weight: bold'>Equipe SalesWeb</p>
+                            </div>
+                        </body>
+                        </html>";
+
                 await _emailSender.SendEmailAsync(
                     Input.Email,
                     "Redefinir sua senha",
-                    $"Por favor, redefina sua senha <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.");
+                    emailBody);
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

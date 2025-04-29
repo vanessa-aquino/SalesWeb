@@ -82,6 +82,27 @@ body {
     border: 2px solid #f1f1f1;
 }
 
+.alert-info,
+.alert-success,
+.alert-danger {
+    background: none !important;
+    color: #C43C08 !important;
+    border: 2px solid #F24D0D !important;
+    font-size: 1rem;
+}
+
+.nav-pills .nav-link.active{
+    background-color: #C43C08 !important;
+    color: #FFF !important;
+}
+
+.form-control:disabled {
+    background-color: #FBF4F4;
+    border: 2px solid #F24D0D;
+    color: #F24D0D;
+}
+
+
 /*Estilização Personalizada*/
 bg-pages {
     background: #FBF4F4;

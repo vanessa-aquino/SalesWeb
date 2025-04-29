@@ -67,9 +67,9 @@ namespace SalesWeb.Areas.Identity.Pages.Account.Manage
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
-            [Display(Name = "New email")]
+            [Required (ErrorMessage = "{0} obrigatório")]
+            [EmailAddress (ErrorMessage = "Digite um email válido")]
+            [Display(Name = "Novo email")]
             public string NewEmail { get; set; }
         }
 
@@ -123,16 +123,33 @@ namespace SalesWeb.Areas.Identity.Pages.Account.Manage
                     pageHandler: null,
                     values: new { area = "Identity", userId = userId, email = Input.NewEmail, code = code },
                     protocol: Request.Scheme);
+
+                var emailBody = $@"
+                        <html> 
+                        <body style='font-family: Arial, sans-serif; background-color: #F4F4F4; padding: 20px;'>
+                            <div style='max-width: 600px; margin: auto; background-color: #FFF; padding: 30px; border-radius: 8px;'>
+                                <h2 style='color: #F24D0D;'>Troca de Email</h2>
+                                <p>Olá, Recebemos a sua solicitação!</p>
+                                <p>Para confirmar seu novo email, clique no botão abaixo:</p>
+                                <p style='text-align: center;'>
+                                    <a href='{HtmlEncoder.Default.Encode(callbackUrl)}' style='display: inline-block; background-color: #F24D0D; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px;'>Confirmar Email</a>
+                                </p>
+                                <p>Se você não solicitou a mudança, ignore este e-mail.</p>
+                                <p style='font-weight: bold'>Equipe SalesWeb</p>
+                            </div>
+                        </body>
+                        </html>";
+
                 await _emailSender.SendEmailAsync(
                     Input.NewEmail,
-                    "Confirme seu email",
+                    "Confirme seu novo email",
                     $"Por favor, confirme sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.");
 
-                StatusMessage = "Confirmation link to change email sent. Please check your email.";
+                StatusMessage = "Link de confirmação enviado. Por favor, verifique sua caixa de entrada";
                 return RedirectToPage();
             }
 
-            StatusMessage = "Your email is unchanged.";
+            StatusMessage = "Seu email não foi alterado.";
             return RedirectToPage();
         }
 
@@ -159,10 +176,27 @@ namespace SalesWeb.Areas.Identity.Pages.Account.Manage
                 pageHandler: null,
                 values: new { area = "Identity", userId = userId, code = code },
                 protocol: Request.Scheme);
+
+            var emailBody = $@"
+                        <html> 
+                        <body style='font-family: Arial, sans-serif; background-color: #F4F4F4; padding: 20px;'>
+                            <div style='max-width: 600px; margin: auto; background-color: #FFF; padding: 30px; border-radius: 8px;'>
+                                <h2 style='color: #F24D0D;'>Confirmação de Email</h2>
+                                <p>Olá, Recebemos o seu cadastro!</p>
+                                <p>Para confirmar seu email, clique no botão abaixo:</p>
+                                <p style='text-align: center;'>
+                                    <a href='{HtmlEncoder.Default.Encode(callbackUrl)}' style='display: inline-block; background-color: #F24D0D; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px;'>Confirmar Email</a>
+                                </p>
+                                <p>Se você não criou essa conta, ignore este e-mail.</p>
+                                <p style='font-weight: bold'>Equipe SalesWeb</p>
+                            </div>
+                        </body>
+                        </html>";
+
             await _emailSender.SendEmailAsync(
                 email,
                 "Confirme seu email",
-                $"Por favor, confirme sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.");
+                emailBody);
 
             StatusMessage = "Email de verificação enviado. Por favor, verifique sua caixa de entrada.";
             return RedirectToPage();

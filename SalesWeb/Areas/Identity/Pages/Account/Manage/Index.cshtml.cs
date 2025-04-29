@@ -56,7 +56,8 @@ namespace SalesWeb.Areas.Identity.Pages.Account.Manage
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "Celular")]
+            [RegularExpression(@"^\d{11}$", ErrorMessage = "O número de celular deve estar no formato (XX)XXXXX-XXXX")]
             public string PhoneNumber { get; set; }
         }
 
@@ -111,7 +112,7 @@ namespace SalesWeb.Areas.Identity.Pages.Account.Manage
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Sual alterações foram salvas";
             return RedirectToPage();
         }
     }

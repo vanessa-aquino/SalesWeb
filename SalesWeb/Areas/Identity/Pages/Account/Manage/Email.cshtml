@@ -1,11 +1,10 @@
 ﻿@page
 @model EmailModel
 @{
-    ViewData["Title"] = "Manage Email";
+    ViewData["Title"] = "Email";
     ViewData["ActivePage"] = ManageNavPages.Email;
 }
 
-<h3>@ViewData["Title"]</h3>
 <partial name="_StatusMessage" for="StatusMessage" />
 <div class="row">
     <div class="col-md-6">
@@ -14,9 +13,9 @@
             @if (Model.IsEmailConfirmed)
             {
                 <div class="form-floating mb-3 input-group">
-                    <input asp-for="Email" class="form-control" placeholder="Please enter your email." disabled />
+                    <input asp-for="Email" class="form-control" placeholder="Entre com o novo email." disabled />
                         <div class="input-group-append">
-                            <span class="h-100 input-group-text text-success font-weight-bold">✓</span>
+                        <span class="h-100 input-group-text font-weight-bold" style="color: #F24D0D;">✓</span>
                         </div>
                     <label asp-for="Email" class="form-label"></label>
                 </div>
@@ -24,17 +23,17 @@
             else
             {
                 <div class="form-floating mb-3">
-                    <input asp-for="Email" class="form-control" placeholder="Please enter your email." disabled />
-                    <label asp-for="Email" class="form-label"></label>
-                    <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
+                    <input asp-for="Email" class="form-control custom-input" placeholder="Entre com o email." disabled />
+                    <label asp-for="Email" class="form-label fs-6"></label>
+                    <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="nav-link mt-3 fw-semibold text-decoration-underline" style="color: #C43C08;">Solicitar verificação de email</button>
                 </div>
             }
             <div class="form-floating mb-3">
-                <input asp-for="Input.NewEmail" class="form-control" autocomplete="email" aria-required="true" placeholder="Please enter new email." />
-                <label asp-for="Input.NewEmail" class="form-label"></label>
+                <input asp-for="Input.NewEmail" class="form-control custom-input" autocomplete="email" aria-required="true" placeholder="Novo email" />
+                <label asp-for="Input.NewEmail" class="form-label fs-6">Novo email</label>
                 <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
             </div>
-            <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="w-100 btn btn-lg btn-primary">Change email</button>
+            <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="w-100 btn btn-outline-primary buttons-crud">Trocar email</button>
         </form>
     </div>
 </div>
