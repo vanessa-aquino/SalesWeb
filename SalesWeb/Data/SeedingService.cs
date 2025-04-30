@@ -13,7 +13,7 @@ namespace SalesWeb.Data
             _context = context;
         }
 
-        public async Task Seed()
+        public async Task SeedAsync()
         {
             if (await _context.Department.AnyAsync() ||
                 await _context.Seller.AnyAsync() ||
@@ -21,6 +21,7 @@ namespace SalesWeb.Data
             {
                 return; // Banco de dados já foi populado
             }
+
             var departments = new List<Department>
             {
             new Department(1, "Eletrônicos"),

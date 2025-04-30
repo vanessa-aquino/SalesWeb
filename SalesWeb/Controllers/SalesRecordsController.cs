@@ -32,7 +32,7 @@ namespace SalesWeb.Controllers
             ViewData["maxDate"] = maxDate.Value.ToString("yyyy-MM-dd");
             ViewData["sellerName"] = sellerName;
 
-            var result = await _salesRecordService.FindByDate(minDate, maxDate, sellerName);
+            var result = await _salesRecordService.FindByDateAsync(minDate, maxDate, sellerName);
             return View(result);
         }
         public async Task<IActionResult> GroupingSearch(DateTime? minDate, DateTime? maxDate, string sellerName, int? departmentId)
@@ -45,20 +45,20 @@ namespace SalesWeb.Controllers
             ViewData["sellerName"] = sellerName;
             ViewData["departmentId"] = departmentId;
 
-            var departments = await _salesRecordService.GetDepartments();
+            var departments = await _salesRecordService.GetDepartmentsAsync();
             ViewBag.Departments = new SelectList(departments, "Id", "Name", departmentId);
 
-            var result = await _salesRecordService.FindByDateGrouping(minDate, maxDate, sellerName, departmentId);
+            var result = await _salesRecordService.FindByDateGroupingAsync(minDate, maxDate, sellerName, departmentId);
             return View(result);
         }
 
         [HttpGet]
-        public async Task<IActionResult> ExportCsv(DateTime? minDate, DateTime? maxDate, string sellerName)
+        public async Task<IActionResult> ExportCsvAsync(DateTime? minDate, DateTime? maxDate, string sellerName)
         {
             if (!minDate.HasValue) minDate = new DateTime(DateTime.Now.Year, 1, 1);
             if (!maxDate.HasValue) maxDate = DateTime.Now;
 
-            var records = await _salesRecordService.FindByDate(minDate, maxDate, sellerName);
+            var records = await _salesRecordService.FindByDateAsync(minDate, maxDate, sellerName);
             var uS = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
             var lines = new List<string>
             {

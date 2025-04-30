@@ -22,13 +22,13 @@ namespace SalesWeb.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var sellers = await _sellerService.FindAll();
+            var sellers = await _sellerService.FindAllAsync();
             return View(sellers);
         }
 
         public async Task<IActionResult> Create()
         {
-            var departments = await _departmentService.FindAll();
+            var departments = await _departmentService.FindAllAsync();
             var viewModel = new SellerFormViewModel { Departments = departments };
             return View(viewModel);
         }
@@ -39,12 +39,12 @@ namespace SalesWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var departmenst = await _departmentService.FindAll();
+                var departmenst = await _departmentService.FindAllAsync();
                 var viewModel = new SellerFormViewModel { Seller = seller, Departments = departmenst };
                 return View(viewModel);
             }
 
-            await _sellerService.Insert(seller);
+            await _sellerService.InsertAsync(seller);
             return RedirectToAction(nameof(Index));
         }
 
@@ -52,7 +52,7 @@ namespace SalesWeb.Controllers
         {
             if (id == null) return RedirectToAction(nameof(Error), new { message = "Id not provided" });
 
-            var seller = await _sellerService.FindById(id.Value);
+            var seller = await _sellerService.FindByIdAsync(id.Value);
             if (seller == null) return RedirectToAction(nameof(Error), new { message = "Id not found" });
 
             return View(seller);
@@ -65,7 +65,7 @@ namespace SalesWeb.Controllers
             try
             {
 
-                await _sellerService.Remove(id);
+                await _sellerService.RemoveAsync(id);
                 return RedirectToAction(nameof(Index));
             }
             catch (IntegrityException err)
@@ -78,7 +78,7 @@ namespace SalesWeb.Controllers
         {
             if (id == null) return RedirectToAction(nameof(Error), new { message = "Id not provided" });
 
-            var seller = await _sellerService.FindById(id.Value);
+            var seller = await _sellerService.FindByIdAsync(id.Value);
             if (seller == null) return RedirectToAction(nameof(Error), new { message = "Id not found" });
 
             return View(seller);
@@ -88,10 +88,10 @@ namespace SalesWeb.Controllers
         {
             if (id == null) return RedirectToAction(nameof(Error), new { message = "Id not provided" });
 
-            var seller = await _sellerService.FindById(id.Value);
+            var seller = await _sellerService.FindByIdAsync(id.Value);
             if (seller == null) return RedirectToAction(nameof(Error), new { message = "Id not found" });
 
-            List<Department> departments = await _departmentService.FindAll();
+            List<Department> departments = await _departmentService.FindAllAsync();
             SellerFormViewModel viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
             return View(viewModel);
         }
@@ -102,7 +102,7 @@ namespace SalesWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var departmenst = await _departmentService.FindAll();
+                var departmenst = await _departmentService.FindAllAsync();
                 var viewModel = new SellerFormViewModel { Seller = seller, Departments = departmenst };
                 return View(viewModel);
             }
@@ -111,7 +111,7 @@ namespace SalesWeb.Controllers
 
             try
             {
-                await _sellerService.Update(seller);
+                await _sellerService.UpdateAsync(seller);
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException err)

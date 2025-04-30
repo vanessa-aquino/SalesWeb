@@ -2,7 +2,6 @@
 using SendGrid;
 using Microsoft.Extensions.Options;
 using SendGrid.Helpers.Mail;
-using System.Threading.Tasks;
 namespace SalesWeb.Services
 {
     public class EmailSender : IEmailSender

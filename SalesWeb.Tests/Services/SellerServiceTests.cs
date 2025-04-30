@@ -40,7 +40,7 @@ namespace SalesWeb.Tests.Services
         {
             var context = GetInMemoryDbContext();
             var service = new SellerService(context); // Cria o SellerService com o novo banco de dados criado
-            var result = await service.FindAll(); // Executa o método que deve retornar todos os vendedores
+            var result = await service.FindAllAsync(); // Executa o método que deve retornar todos os vendedores
 
             Assert.NotNull(result);
             Assert.IsType<List<Seller>>(result);
@@ -52,7 +52,7 @@ namespace SalesWeb.Tests.Services
         {
             var context = GetInMemoryDbContext();
             var service = new SellerService(context);
-            var result = await service.FindById(1);
+            var result = await service.FindByIdAsync(1);
 
             Assert.NotNull(result);
             Assert.Equal("Primeiro Nome", result.Name);
@@ -63,7 +63,7 @@ namespace SalesWeb.Tests.Services
         {
             var context = GetInMemoryDbContext();
             var service = new SellerService(context);
-            var result = await service.FindById(999);
+            var result = await service.FindByIdAsync(999);
 
             Assert.Null(result);
         }
@@ -75,7 +75,7 @@ namespace SalesWeb.Tests.Services
             var service = new SellerService(context);
 
             var newSeller = new Seller { Id = 3, Name = "Insert Nome", Email = "teste-insert@email.com", BirthDate = new DateTime(1998, 2, 1), BaseSalary = 1000.00 };
-            await service.Insert(newSeller);
+            await service.InsertAsync(newSeller);
 
             var seller = await context.Seller.FindAsync(3);
 
@@ -89,7 +89,7 @@ namespace SalesWeb.Tests.Services
             var context = GetInMemoryDbContext();
             var service = new SellerService(context);
 
-            await service.Remove(2);
+            await service.RemoveAsync(2);
 
             var removeSeller = await context.Seller.FindAsync(2);
 
@@ -102,7 +102,7 @@ namespace SalesWeb.Tests.Services
             var context = GetInMemoryDbContext();
             var service = new SellerService(context);
 
-            await Assert.ThrowsAsync <NotFoundException>(() => service.Remove(999));
+            await Assert.ThrowsAsync <NotFoundException>(() => service.RemoveAsync(999));
         }
 
         [Fact]
@@ -114,7 +114,7 @@ namespace SalesWeb.Tests.Services
             var seller = await context.Seller.FindAsync(1);
             seller.Name = "Atualizado";
             
-            await service.Update(seller);
+            await service.UpdateAsync(seller);
 
             var update = await context.Seller.FindAsync(1);
 
@@ -130,7 +130,7 @@ namespace SalesWeb.Tests.Services
             var service = new SellerService(context);
 
             var seller = new Seller { Id = 999, Name = "X", Email = "x@email.com", DepartmentId = 1 };
-            await Assert.ThrowsAsync<NotFoundException>(() => service.Update(seller));
+            await Assert.ThrowsAsync<NotFoundException>(() => service.UpdateAsync(seller));
         }
     }
 }

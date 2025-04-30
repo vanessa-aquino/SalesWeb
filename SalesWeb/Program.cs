@@ -109,7 +109,7 @@ app.MapRazorPages(); // Necessário para páginas de login/resgister padrão do 
 using (var scope = app.Services.CreateScope()) // Criação de um escopo de serviço (um escopo é criado uma vez por requisição ou operação, utilizado em uma área restrita)
 {
     var seedingService = scope.ServiceProvider.GetRequiredService<SeedingService>(); // Obtendo a instância do SeedingService através do ServiceProvider
-    await seedingService.Seed(); // Execução do método Seed
+    await seedingService.SeedAsync(); // Execução do método Seed
 }
 
 app.Run(); // Inicia o servidor web para começar a receber requisições.

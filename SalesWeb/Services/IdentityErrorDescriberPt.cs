@@ -9,7 +9,7 @@ namespace SalesWeb.Services
             return new IdentityError
             {
                 Code = nameof(PasswordRequiresNonAlphanumeric),
-                Description = "A senha deve conter pelo menos um caractere especial."
+                Description = "A senha deve conter pelo menos um caracter especial."
             };
 
         }
