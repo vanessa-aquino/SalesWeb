@@ -44,12 +44,15 @@ namespace SalesWeb.Services
             if(!string.IsNullOrEmpty(sellerName)) result = result.Where(x => x.Seller.Name.ToLower().ToLower().Contains(sellerName.ToLower()));
             if(departmentId.HasValue) result = result.Where(x => x.Seller.Department.Id == departmentId.Value);
 
-            return await result
+            var list =  await result
                 .Include(x => x.Seller)
                 .Include(x => x.Seller.Department)
                 .OrderByDescending(x => x.Date)
-                .GroupBy(x => x.Seller.Department)
                 .ToListAsync();
+
+            return list
+                .GroupBy(x => x.Seller.Department)
+                .ToList();
         }
     }
 }
