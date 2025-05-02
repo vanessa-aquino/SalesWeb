@@ -1,4 +1,5 @@
-﻿using SalesWeb.Data;
+﻿using SalesWeb.Controllers;
+using SalesWeb.Data;
 using SalesWeb.Models.Enums;
 using SalesWeb.Services;
 using SalesWeb.Tests.Utils;
@@ -12,12 +13,14 @@ namespace SalesWeb.Tests.Common
         protected DepartmentService DepartmentService { get; private set; }
         protected SalesRecordService SalesRecordService { get; private set; }
         protected SalesStatus SalesStatus { get; private set; }
+        protected DepartmentsController DepartmentsController { get; private set; }
         protected BaseTest()
         {
             Context = TestDbContextFactory.GetInMemoryDbContext();
             SellerService = new SellerService(Context);  // Cria o SellerService com o novo banco de dados criado
             DepartmentService = new DepartmentService(Context);
             SalesRecordService = new SalesRecordService(Context);
+            DepartmentsController = new DepartmentsController(Context);
         }
     }
 }
