@@ -11,7 +11,7 @@ namespace SalesWeb.Tests.Services
         [Fact] // Para marcar que é um teste
         public async Task FindAllAsync_ReturnSellerList()
         {
-            var result = await SellerService.FindAllAsync(); // Executa o método que deve retornar tod
+            var result = await SellerService.FindAllAsync(); // Executa o método que deve retornar
 
             Assert.NotNull(result);
             Assert.IsType<List<Seller>>(result);
