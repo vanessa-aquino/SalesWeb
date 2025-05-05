@@ -38,7 +38,7 @@ namespace SalesWeb.Tests.Utils
                 BirthDate = new DateTime(1998, 2, 1),
                 BaseSalary = 1000.00,
                 DepartmentId = 1,
-                Department = department
+                Department = department,
             };
 
             context.Seller.AddRange(seller1, seller2);
@@ -51,7 +51,7 @@ namespace SalesWeb.Tests.Utils
                         Date = DateTime.Now.AddDays(-10),
                         Amount = 1500.00,
                         Status = SalesStatus.Billed,
-                        Seller = seller1
+                        Seller = seller1,
                     },
                     new SalesRecord
                     {

@@ -14,6 +14,8 @@ namespace SalesWeb.Tests.Common
         protected SalesRecordService SalesRecordService { get; private set; }
         protected SalesStatus SalesStatus { get; private set; }
         protected DepartmentsController DepartmentsController { get; private set; }
+        protected SalesRecordsController SalesRecordsController { get; private set; }
+        protected SellersController SellersController { get; private set; }
         protected BaseTest()
         {
             Context = TestDbContextFactory.GetInMemoryDbContext();
@@ -21,6 +23,8 @@ namespace SalesWeb.Tests.Common
             DepartmentService = new DepartmentService(Context);
             SalesRecordService = new SalesRecordService(Context);
             DepartmentsController = new DepartmentsController(Context);
+            SalesRecordsController = new SalesRecordsController(SalesRecordService);
+            SellersController = new SellersController(SellerService, DepartmentService);
         }
     }
 }

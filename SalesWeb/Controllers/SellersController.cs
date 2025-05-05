@@ -64,7 +64,6 @@ namespace SalesWeb.Controllers
         {
             try
             {
-
                 await _sellerService.RemoveAsync(id);
                 return RedirectToAction(nameof(Index));
             }
