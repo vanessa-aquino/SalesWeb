@@ -26,6 +26,7 @@ O **SalesWeb MVC** foi desenvolvido com o objetivo de praticar os principais con
 - MySQL (via Entity Framework)
 
 ## 🧱 Estrutura do projeto
+```plaintext
 SalesWeb/
 
 ├── Areas/Identity          # Gerenciamento de login e autenticação
@@ -55,7 +56,7 @@ SalesWeb/
 ├── SalesWeb.csproj         # Arquivo do projeto .NET
 
 └── appsettings*.json       # Configurações da aplicação
-
+```
 ## 🧪 Como rodar o projeto localmente
 
 Siga os passos abaixo para executar o projeto SalesWeb MVC em sua máquina:
